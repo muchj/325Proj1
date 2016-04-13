@@ -100,7 +100,19 @@ int mssAlgorithm3(int* array, int f, int l)
 ////////////////////////////////////////////
 //Algorithm 4
 ////////////////////////////////////////////
-
+int mssAlgorithm4(int* array, int size)
+{
+    int max1, max2 = 0;
+    
+    for(int i = 0; i < size; i++)
+    {
+       max1 = max(0, max1 + array[i]);
+       max2 = max(max1, max2);        
+    }
+    
+    return max2;
+    
+}
 ////////////////////////////////////////////
 //END - Algorithms
 ////////////////////////////////////////////
