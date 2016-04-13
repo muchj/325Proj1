@@ -73,7 +73,7 @@ int mssAlgorithm3(int* array, int f, int l)
 	
 	int mid = (f + l) / 2;
 	
-	for(int i = f; i <= mid; i++)
+	for(int i = mid; i >= f; i--)
 	{
 		sum += array[i];
 		maxLeft = max(sum, maxLeft);
