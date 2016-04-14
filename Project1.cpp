@@ -38,22 +38,26 @@ using namespace std;
 //Algorithm 2
 ////////////////////////////////////////////
 
-int mssAlgorithm2(int array[]){
+void mssAlgorithm2(int* array, int size){
 	int i, j, sum;
-	int arrayLength = array.length() - 1;
+ 	int startIdx = -1;
+        int endIdx = -1;
 	int maxSum = array[0];
 	
-	for(i = 0; i < arrayLength; i++){
+	for(i = 0; i < size; i++){
 		sum = 0;
 		j = i;
-		for(j = i; j < arrayLength; j++){
+		for(j = i; j < size; j++){
 			sum += array[j];
 			if(sum > maxSum){
 				maxSum = sum;
+                                startIdx = i;
+                                endIdx = j;
 			}
 		}
 	}
-	return maxSum;
+        
+        output(array, size, maxSum, startIdx, endIdx);
 }
 ////////////////////////////////////////////
 //Algorithm 3
