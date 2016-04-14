@@ -100,18 +100,39 @@ int mssAlgorithm3(int* array, int f, int l)
 ////////////////////////////////////////////
 //Algorithm 4
 ////////////////////////////////////////////
-int mssAlgorithm4(int* array, int size)
+void mssAlgorithm4(int* array, int size)
 {
-    int max1, max2 = 0;
+    int maxNow = 0; 
+    int maxBest = 0;
+    int startBest = -1;
+    int startNow = -1;
+    int stopBest = -1;
     
     for(int i = 0; i < size; i++)
     {
-       max1 = max(0, max1 + array[i]);
-       max2 = max(max1, max2);        
+        int v = maxNow + array[i];
+        if(v > 0)
+        {   
+            if(maxNow == 0)
+            {
+                startNow = i;
+            }
+            maxNow = v;
+        }
+        else
+        {
+            maxNow = 0;
+        }
+        
+        if(maxNow > maxBest)
+        {
+            maxBest = maxNow;
+            stopBest = i;
+            startBest = startNow;
+        }
     }
     
-    return max2;
-    
+    output(array, size, maxBest, startBest, stopBest);    
 }
 ////////////////////////////////////////////
 //END - Algorithms
@@ -120,6 +141,29 @@ int mssAlgorithm4(int* array, int size)
 ////////////////////////////////////////////
 //START - Programs
 ////////////////////////////////////////////
+void output(int* array, int arrSize, int sum, int startIdx, int endIdx)
+{
+    ofstream out;
+    
+    out.open("MSS_Results.txt", ofstream::out | ofstream::app);
+    
+    for(int i = 0; i < arrSize; i++)
+    {
+        out << array[i] << ' ';
+    }
+    out << '\n';
+    
+    for(int i = startIdx; i <= endIdx; i++)
+    {
+        out << array[i] << ' ';
+    }
+    out << '\n';
+    
+    out << sum << '\n';
+    
+    out.close();    
+}
+
 int inputFileLineCount(){
 	int lineCount = 0;
 	string line;
@@ -142,13 +186,14 @@ int inputFileLineCount(){
 }
 void parseInputFile(lineCount){
 		string line;
+		string delimiter = ", ";
 		
 		ifstream inputFile("MSS_Problems.txt");
 		if (inputfile)
 		{
 			while(getline(inputFile, line)
 			{
-				if
+				
 			}
 		}
 		
