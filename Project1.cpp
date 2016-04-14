@@ -10,6 +10,8 @@ Instructions:
 #include <string>
 #include <algorithm>
 using namespace std;
+
+void output(int* array, int arrSize, int sum, int startIdx, int endIdx);
 ////////////////////////////////////////////
 // START - Algorithms
 ////////////////////////////////////////////
@@ -80,7 +82,7 @@ int mssAlgorithm3(int* array, int f, int l)
 		return array[0];
 	}
 	
-	int mid = (f + l) / 2;
+	mid = (f + l) / 2;
 	
 	for(int i = mid; i >= f; i--)
 	{
@@ -146,7 +148,7 @@ void mssAlgorithm4(int* array, int size)
 ////////////////////////////////////////////
 //END - Algorithms
 ////////////////////////////////////////////
-*/
+
 ////////////////////////////////////////////
 //START - Programs
 ////////////////////////////////////////////
@@ -172,7 +174,10 @@ void output(int* array, int arrSize, int sum, int startIdx, int endIdx)
     
     out.close();    
 }
-
+////////////////////////////////////////////
+//	inputFileLineCount
+//	- Gets line count of MSS_Problems.txt
+////////////////////////////////////////////
 int inputFileLineCount(){
 	int lineCount = 0;
 	string line;
@@ -193,27 +198,75 @@ int inputFileLineCount(){
 	cout << "Number of lines is " << lineCount << endl;
 	return lineCount;
 }
-void parseInputFile(lineCount){
+////////////////////////////////////////////
+// 	parseInputFile
+//	- Is THE function called that is used for grading
+//	- It reads in MSS_Problems.txt
+//	- Crunches the sum for all for algorithms
+//	- Outputs the result onto the screen AND MSS_Results.txt for grading 
+////////////////////////////////////////////
+void parseInputFile(int lineCount){
 		string line;
 		string delimiter = ", ";
 		
 		ifstream inputFile("MSS_Problems.txt");
-		if (inputfile)
+		if (inputFile)
 		{
-			while(getline(inputFile, line)
+			while(getline(inputFile, line))
 			{
+				//cout << line << endl;
 				
 			}
 		}
-		
-		cout << "Now calculating line # " << lineCount +1 << endl;
-		
+		cout << "Now calculating line # " << lineCount +1 << endl;	
 }
+////////////////////////////////////////////
+//	testCorrectness
+//	- Used for calculating grade
+////////////////////////////////////////////
+void testCorrectness()
+{
+	int numberOfArraysForCalc = inputFileLineCount();
+	
+	int i = 0;
+	while(i < numberOfArraysForCalc)
+	{
+		parseInputFile(i);
+		i += 1;
+	}
+}
+////////////////////////////////////////////
+//END - Programs
+////////////////////////////////////////////
 
-int main(){
-	int lineCount;
-	lineCount = inputFileLineCount();
-	parseInputFile(lineCount);
+////////////////////////////////////////////
+// MAIN
+////////////////////////////////////////////
+int main(int argc, char *argv[]){
+	if( argc > 1)
+	{
+		/*if(argv[1] == "-r") //Testing Run Time
+		{
+			testRunTime();
+		}*/
+		if(argv[1] == "-c") //Testing Correctness
+		{
+			testCorrectness();
+		}
+		/*else if(argv[1] == "-e") //Testing Example
+		{
+			testExample();
+		}*/
+		else
+		{
+			cout << "You did not enter correct arguments.\n" << endl;
+			cout << "Please add -r,-c, or -e as an argument." << endl;
+		}
+	}
+	else
+	{
+		testCorrectness(); //This will default to test correctness if not enough arguments are entered.	
+	}
 	return 0;
 }
 
