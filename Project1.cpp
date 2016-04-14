@@ -17,22 +17,27 @@ using namespace std;
 // Algorithm 1 - Enumeration
 ////////////////////////////////////////////
 
-/*int mssAlgorithm1(int array[]){
+void mssAlgorithm1(int* array, int size){
 	int i, j, k, sum;
+        int startIdx = -1;
+        int endIdx = -1;
 	int maxSum = array[0];
 	
-	for(i = 0; i < array.length; i++){
-		for(j = 0; j < array.length(); j++){
+	for(i = 0; i < size; i++){
+		for(j = 0; j < size; j++){
 			sum = 0;
 			for(k = i; k < j; k++){
 				sum += array[k];
 			}
 			if(sum > maxSum){
 				maxSum = sum;
+                                startIdx = i;
+                                endIdx = j;
 			}
 		}
 	}
-	return maxSum;
+        
+        output(array, size, maxSum, startIdx, endIdx);
 }
 ////////////////////////////////////////////
 //Algorithm 2
