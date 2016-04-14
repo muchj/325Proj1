@@ -37,7 +37,9 @@ int main(int argc, char* argv[])
 	{
 		num = rand() % (max - min + 1) + min;
 		outputFile << num;
-		outputFile << " ";
+		
+		if (total - i > 1) // No space after last entry.
+			outputFile << " ";
 
 		if ((i + 1)% 20 == 0) // This just makes the file look nicer.
 			outputFile << "\n";
