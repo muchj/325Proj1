@@ -1,0 +1,36 @@
+////////////////////////////////////////////
+// 	parseInputFile
+//	- Is THE function called that is used for grading
+//	- It reads in MSS_Problems.txt
+//	- Crunches the sum for all for algorithms
+//	- Outputs the result onto the screen AND MSS_Results.txt for grading 
+////////////////////////////////////////////
+void parseInputFile(int lineCount){
+		
+		char comma = ',';
+		char leftBracket = '[';
+		char rightBracket = ']';
+		
+		ifstream inputFile("MSS_Problems.txt");
+		ofstream outputFile("tempFile");
+		char c;
+		int nextInt;
+		if (inputFile && outputFile)
+		{
+			while(!inputFile.eof())
+			{
+				inputFile >> c;
+				if (c == comma || c == leftBracket)// We know an int is next.
+				{
+					inputFile >> nextInt;
+					outputFile << nextInt;
+					outputFile << ' ';					
+				}
+
+				if (c == rightBracket) // End of an array.
+					outputFile << '\n';
+				
+			}
+		}
+		cout << "Now calculating line # " << lineCount + 1 << endl;	
+}
