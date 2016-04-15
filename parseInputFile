@@ -32,5 +32,7 @@ void parseInputFile(int lineCount){
 				
 			}
 		}
+		inputFile.close();
+		outputFile.close();
 		cout << "Now calculating line # " << lineCount + 1 << endl;	
 }
