@@ -49,6 +49,7 @@ void parseInputFile(int lineCount){
 					arraySize[i] << size;
 					size = 0;
 					i++;
+					j = 0;
 					
 				}
 				
