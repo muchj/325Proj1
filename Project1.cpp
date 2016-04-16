@@ -136,7 +136,7 @@ void parseInputFile(int lineCount)
 	char rightBracket = ']';
 	
 	ifstream inputFile("MSS_Problems.txt");
-	ofstream outputFile("tempFile"); // Used for testing.
+	//ofstream outputFile("tempFile"); // Used for testing.
 	char c;
 	int nextInt;
 	
@@ -148,7 +148,7 @@ void parseInputFile(int lineCount)
 	int i = 0; // Incremental number for line (array) from input lineCount.
 	int j = 0; // A[i][j]
 	
-	if (inputFile && outputFile)
+	if (inputFile /*&& outputFile*/)
 	{
 		while(!inputFile.eof())
 		{
@@ -158,8 +158,8 @@ void parseInputFile(int lineCount)
 				inputFile >> nextInt;
 
 				// Used for testing.
-				outputFile << nextInt;
-				outputFile << ' ';
+				//outputFile << nextInt;
+				//outputFile << ' ';
 				
 				// Plug the int into its spot, and increment the spot and size.
 				A[i][j] = nextInt;
@@ -171,7 +171,7 @@ void parseInputFile(int lineCount)
 			if (c == rightBracket) // End of an array.
 			{
 				// Used for testing.
-				outputFile << '\n';
+				//outputFile << '\n';
 				
 				// Plug in the array size, reset size to 0, and move to next array.
 				arraySize[i] = size;
@@ -184,7 +184,7 @@ void parseInputFile(int lineCount)
 		}
 	}
 	inputFile.close();
-	outputFile.close();
+	//outputFile.close();
 	
 	// Should be able to run algorithms on A[i][] and arraySize[i] here.
 
@@ -228,21 +228,21 @@ void testCorrectness()
 results mssAlgorithm1(int* array, int size)
 {
 	int i, j, k, sum;
-        struct results r;
-        r.sum = array[0];
-        r.startIdx = -1;
-        r.endIdx = -1;
+	struct results r;
+	r.sum = 0;
+	r.startIdx = -1;
+	r.endIdx = -1;
 	
 	for(i = 0; i < size; i++){
 		for(j = 0; j < size; j++){
 			sum = 0;
-			for(k = i; k < j; k++){
+			for(k = i; k <= j; k++){
 				sum += array[k];
 			}
 			if(sum > r.sum){
 				r.sum = sum;
-                                r.startIdx = i;
-                                r.endIdx = j;
+				r.startIdx = i;
+				r.endIdx = j;
 			}
 		}
 	}
@@ -257,7 +257,7 @@ results mssAlgorithm2(int* array, int size)
 {
 	int i, j, sum;
         results r;
-        r.sum = array[0];
+        r.sum = 0;
         r.startIdx = 0;
         r.endIdx = 0;
 	
