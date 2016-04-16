@@ -73,27 +73,25 @@ void output(int* array, int arrSize, int sum, int startIdx, int endIdx, int algN
 	out << "Algorithm " << algNo << ":\n";
 	cout << "Algorithm " << algNo << ":\n";
 
+	out << "\nComplete array:\n";
+	cout << "\nComplete array:\n";
     for(int i = 0; i < arrSize; i++)
     {
         out << array[i] << ' ';
 		cout << array[i] << ' ';
     }
-    out << '\n';
-	cout << '\n';
+
+    out << "\n\nMaximum subsequence:\n";
+	cout << "\n\nMaximum subsequence:\n";	
     
     for(int i = startIdx; i <= endIdx; i++)
     {
         out << array[i] << ' ';
 		cout << array[i] << ' ';
-    }
-    out << '\n';
-	cout << '\n';
+    }    
     
-    out << sum << '\n';
-	cout << sum << '\n';
-
-	out << '\n';
-	cout << '\n';
+    out <<"\n\nSum of MSS:\n" << sum << endl << endl;
+	cout <<"\n\nSum of MSS:\n" << sum << endl << endl;	
     
     out.close();    
 }
@@ -198,7 +196,7 @@ void parseInputFile(int lineCount)
 		output(A[k], arraySize[k], resOut.sum, resOut.startIdx, resOut.endIdx, 2);
 
 		// Alg 3 should always start at index 0, right?
-		resOut = mssAlgorithm3(A[k], 0, arraySize[k]);
+		resOut = mssAlgorithm3(A[k], 0, arraySize[k]);		
 		output(A[k], arraySize[k], resOut.sum, resOut.startIdx, resOut.endIdx, 3);
 
 		resOut = mssAlgorithm4(A[k], arraySize[k]);
@@ -268,8 +266,8 @@ results mssAlgorithm2(int* array, int size)
 			sum += array[j];
 			if(sum > r.sum){
 				r.sum = sum;
-                                r.startIdx = i;
-                                r.endIdx = j;
+				r.startIdx = i;
+				r.endIdx = j;
 			}
 		}
 	}
@@ -370,10 +368,11 @@ results mssAlgorithm4(int* array, int size)
     int startNow = -1;
     int stopBest = -1;
     results r;
+	int v;
     
     for(int i = 0; i < size; i++)
     {
-        int v = maxNow + array[i];
+        v = maxNow + array[i];
         if(v > 0)
         {   
             if(maxNow == 0)
