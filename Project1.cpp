@@ -18,6 +18,9 @@ struct results{
     int endIdx;
 };
 
+////////////////////////////////////////////
+// Function Prototypes
+////////////////////////////////////////////
 void output(int* array, int arrSize, int sum, int startIdx, int endIdx, int algNo);
 int inputFileLineCount();
 void parseInputFile(int lineCount);
@@ -194,7 +197,8 @@ void parseInputFile(int lineCount)
 		resOut = mssAlgorithm2(A[k], arraySize[k]);
 		output(A[k], arraySize[k], resOut.sum, resOut.startIdx, resOut.endIdx, 2);
 
-		resOut = mssAlgorithm3(A[k], 1, arraySize[k]);
+		// Alg 3 should always start at index 0, right?
+		resOut = mssAlgorithm3(A[k], 0, arraySize[k]);
 		output(A[k], arraySize[k], resOut.sum, resOut.startIdx, resOut.endIdx, 3);
 
 		resOut = mssAlgorithm4(A[k], arraySize[k]);
