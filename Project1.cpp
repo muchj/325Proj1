@@ -205,7 +205,7 @@ void parseInputFile(int lineCount)
 			output(A[k], arraySize[k], resOut.sum, resOut.startIdx, resOut.endIdx, 2);
 
 			// Alg 3 should always start at index 0, right?
-			resOut = mssAlgorithm3(A[k], 0, arraySize[k]);		
+			resOut = mssAlgorithm3(A[k], 0, arraySize[k] - 1);		
 			output(A[k], arraySize[k], resOut.sum, resOut.startIdx, resOut.endIdx, 3);
 
 			resOut = mssAlgorithm4(A[k], arraySize[k]);
