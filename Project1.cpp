@@ -274,7 +274,7 @@ void testRunTime()
 	t = clock() - t;
 
 	// Report the results.
-	cout << endl << numberOfElements << " array elemnts took " << t;
+	cout << endl << numberOfElements << " array elements took " << t;
 	cout << " ms to process with algorithm " << algorithmNumber << ".\n\n";
 }
 
