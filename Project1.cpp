@@ -9,8 +9,11 @@ Instructions:
 #include <istream>
 #include <string>
 #include <algorithm>
+#include <ctime>
 
 #define MAX_ARRAY_SIZE 100
+#define MIN_ELEMENT -5
+#define MAX_ELEMENT 15
 
 using namespace std;
 
@@ -27,6 +30,7 @@ void output(int* array, int arrSize, int sum, int startIdx, int endIdx, int algN
 int inputFileLineCount();
 void parseInputFile(int lineCount);
 void testCorrectness();
+void testRunTime();
 results mssAlgorithm1(int* array, int size);
 results mssAlgorithm2(int* array, int size);
 results mssAlgorithm3(int* array, int f, int l);
@@ -38,28 +42,33 @@ results mssAlgorithm4(int* array, int size);
 int main(int argc, char *argv[]){
 	if( argc > 1)
 	{
-		/*if(argv[1] == "-r") //Testing Run Time
+		// Had to assign a string for some reason.
+		string choice = argv[1];
+
+		if(choice == "-r") //Testing Run Time
 		{
 			testRunTime();
-		}*/
-		if(argv[1] == "-c") //Testing Correctness
+		}
+		else if(choice == "-c") //Testing Correctness
 		{
 			testCorrectness();
 		}
-		/*else if(argv[1] == "-e") //Testing Example
+		else if(choice == "-e") //Testing Example
 		{
-			testExample();
-		}*/
+			cout << "\nThis option hasn't been implemented yet.\n";
+			//testExample();
+		}
 		else
 		{
 			cout << "You did not enter correct arguments.\n" << endl;
 			cout << "Please add -r,-c, or -e as an argument." << endl;
 		}
 	}
+
+	//This will default to test correctness if not enough arguments are entered.
 	else
-	{
-		testCorrectness(); //This will default to test correctness if not enough arguments are entered.	
-	}
+		testCorrectness(); 	
+
 	return 0;
 }
 
@@ -212,6 +221,63 @@ void testCorrectness()
 {	
 	parseInputFile(inputFileLineCount());
 }
+
+////////////////////////////////////////////
+//	testRunTime
+//	- Used for algorithm analysis.
+////////////////////////////////////////////
+void testRunTime()
+{
+	// Seed the random generator.
+	unsigned seed;
+	seed = time(0);
+	srand(seed);
+
+	// User selects which algorithm to run.	
+	cout << "\nWhich algorithm do you wish to test? (1, 2, 3, or 4) ";
+	int algorithmNumber;
+	cin >> algorithmNumber;
+
+	// User selects the number of array elements.
+	cout << "\nHow many elements in the array? ";
+	int numberOfElements;
+	cin >> numberOfElements;
+
+	// Create the array.
+	int A[numberOfElements];
+
+	// Assign random integers to the array.
+	for (int i = 0; i < numberOfElements; i++)
+	{
+		A[i] = rand() % (MAX_ELEMENT - MIN_ELEMENT + 1) - MIN_ELEMENT; 
+	}
+
+	clock_t t;
+	results testTime;
+
+	// Time the chosen algorithm.
+	t = clock();
+	switch (algorithmNumber) // 1 extra calculation shouldn't hurt the results.
+	{
+		case 1:	testTime = mssAlgorithm1(A, numberOfElements);
+				break;
+
+		case 2:	testTime = mssAlgorithm2(A, numberOfElements);
+				break;
+
+		case 3:	testTime = mssAlgorithm3(A, 0, numberOfElements);
+				break;
+
+		default: testTime = mssAlgorithm4(A, numberOfElements);
+				 algorithmNumber = 4;
+	}
+	t = clock() - t;
+
+	// Report the results.
+	cout << endl << numberOfElements << " array elemnts took " << t;
+	cout << " ms to process with algorithm " << algorithmNumber << ".\n\n";
+}
+
 ////////////////////////////////////////////
 //END - Programs
 ////////////////////////////////////////////
