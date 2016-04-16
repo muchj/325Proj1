@@ -31,6 +31,10 @@ int inputFileLineCount();
 void parseInputFile(int lineCount);
 void testCorrectness();
 void testRunTime();
+
+////////////////////////////////////////////
+// Algorithm Prototypes
+////////////////////////////////////////////
 results mssAlgorithm1(int* array, int size);
 results mssAlgorithm2(int* array, int size);
 results mssAlgorithm3(int* array, int f, int l);
@@ -240,14 +244,14 @@ void testRunTime()
 
 	// User selects the number of array elements.
 	cout << "\nHow many elements in the array? ";
-	int numberOfElements;
+	unsigned long numberOfElements;
 	cin >> numberOfElements;
 
 	// Create the array.
 	int A[numberOfElements];
 
 	// Assign random integers to the array.
-	for (int i = 0; i < numberOfElements; i++)
+	for (unsigned long i = 0; i < numberOfElements; i++)
 	{
 		A[i] = rand() % (MAX_ELEMENT - MIN_ELEMENT + 1) - MIN_ELEMENT; 
 	}
@@ -274,8 +278,9 @@ void testRunTime()
 	t = clock() - t;
 
 	// Report the results.
-	cout << endl << numberOfElements << " array elemnts took " << t;
-	cout << " ms to process with algorithm " << algorithmNumber << ".\n\n";
+	cout << endl << numberOfElements << " array elements took " << t;
+	cout << " micro seconds to process with algorithm " << algorithmNumber;
+	cout << ".\n\n";
 }
 
 ////////////////////////////////////////////
@@ -315,7 +320,7 @@ results mssAlgorithm1(int* array, int size)
 }
 
 ////////////////////////////////////////////
-//Algorithm 2
+//Algorithm 2 - Better Enumeration
 ////////////////////////////////////////////
 results mssAlgorithm2(int* array, int size)
 {
@@ -342,7 +347,7 @@ results mssAlgorithm2(int* array, int size)
 }
  
 ////////////////////////////////////////////
-//Algorithm 3
+//Algorithm 3 - Divide and Conquer
 ////////////////////////////////////////////
 results mssAlgorithm3(int* array, int f, int l)
 {
@@ -424,7 +429,7 @@ results mssAlgorithm3(int* array, int f, int l)
 }
 
 ////////////////////////////////////////////
-//Algorithm 4
+//Algorithm 4 - Linear-time
 ////////////////////////////////////////////
 results mssAlgorithm4(int* array, int size)
 {
