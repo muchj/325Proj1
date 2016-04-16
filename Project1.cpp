@@ -269,7 +269,7 @@ void testRunTime()
 		case 2:	testTime = mssAlgorithm2(A, numberOfElements);
 				break;
 
-		case 3:	testTime = mssAlgorithm3(A, 0, numberOfElements);
+		case 3:	testTime = mssAlgorithm3(A, 0, numberOfElements - 1);
 				break;
 
 		default: testTime = mssAlgorithm4(A, numberOfElements);
