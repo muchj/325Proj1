@@ -279,8 +279,12 @@ void testRunTime()
 
 	// Report the results.
 	cout << endl << numberOfElements << " array elements took " << t;
+<<<<<<< HEAD
 	cout << " micro seconds to process with algorithm " << algorithmNumber;
 	cout << ".\n\n";
+=======
+	cout << " ms to process with algorithm " << algorithmNumber << ".\n\n";
+>>>>>>> origin/Structs
 }
 
 ////////////////////////////////////////////
