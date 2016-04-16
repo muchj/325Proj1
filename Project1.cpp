@@ -10,6 +10,8 @@ Instructions:
 #include <string>
 #include <algorithm>
 
+#define MAX_ARRAY_SIZE 100
+
 using namespace std;
 
 struct results{
@@ -68,32 +70,36 @@ void output(int* array, int arrSize, int sum, int startIdx, int endIdx, int algN
 {
     ofstream out;
     
-    out.open("MSS_Results.txt", ofstream::out | ofstream::app);
+    out.open("MSS_Results.txt", ofstream::out | ofstream::app);	
     
+	// Print the algorithm number.
 	out << "Algorithm " << algNo << ":\n";
 	cout << "Algorithm " << algNo << ":\n";
 
+	// Print the complete array.
 	out << "\nComplete array:\n";
 	cout << "\nComplete array:\n";
-    for(int i = 0; i < arrSize; i++)
-    {
-        out << array[i] << ' ';
+	for(int i = 0; i < arrSize; i++)
+	{
+		out << array[i] << ' ';
 		cout << array[i] << ' ';
-    }
+	}
 
-    out << "\n\nMaximum subsequence:\n";
+	// Print the maximum subsequence.
+	out << "\n\nMaximum subsequence:\n";
 	cout << "\n\nMaximum subsequence:\n";	
-    
-    for(int i = startIdx; i <= endIdx; i++)
-    {
-        out << array[i] << ' ';
+	
+	for(int i = startIdx; i <= endIdx; i++)
+	{
+		out << array[i] << ' ';
 		cout << array[i] << ' ';
-    }    
-    
-    out <<"\n\nSum of MSS:\n" << sum << endl << endl;
+	}    
+	
+	// Print the sum.
+	out <<"\n\nSum of MSS:\n" << sum << endl << endl;
 	cout <<"\n\nSum of MSS:\n" << sum << endl << endl;	
-    
-    out.close();    
+	
+	out.close(); 	
 }
 ////////////////////////////////////////////
 //	inputFileLineCount
@@ -129,16 +135,18 @@ int inputFileLineCount()
 ////////////////////////////////////////////
 void parseInputFile(int lineCount)
 {
+	// Delimiters
 	char comma = ',';
 	char leftBracket = '[';
 	char rightBracket = ']';
 	
 	ifstream inputFile("MSS_Problems.txt");
-	//ofstream outputFile("tempFile"); // Used for testing.
-	char c;
+	
+	// Get characters until an int is next.
+	char c; 
 	int nextInt;
 	
-	int A[lineCount][100]; // Make lineCount number of arrays.
+	int A[lineCount][MAX_ARRAY_SIZE]; // Make lineCount number of arrays.
 
 	int arraySize[lineCount]; // Corresponding array sizes.
 
@@ -146,63 +154,55 @@ void parseInputFile(int lineCount)
 	int i = 0; // Incremental number for line (array) from input lineCount.
 	int j = 0; // A[i][j]
 	
-	if (inputFile /*&& outputFile*/)
+	if (inputFile)
 	{
 		while(!inputFile.eof())
 		{
 			inputFile >> c;
 			if (c == comma || c == leftBracket)// We know an int is next.
 			{					
-				inputFile >> nextInt;
-
-				// Used for testing.
-				//outputFile << nextInt;
-				//outputFile << ' ';
+				inputFile >> nextInt;				
 				
 				// Plug the int into its spot, and increment the spot and size.
-				A[i][j] = nextInt;
-				//cout << nextInt << "\t" << A[i][j] << endl;
+				A[i][j] = nextInt;				
 				j++;
 				size++;
 			}
 
 			if (c == rightBracket) // End of an array.
-			{
-				// Used for testing.
-				//outputFile << '\n';
-				
+			{				
 				// Plug in the array size, reset size to 0, and move to next array.
 				arraySize[i] = size;
 				size = 0;
 				i++;
-				j = 0;
-				
-			}
-			
+				j = 0;				
+			}			
+		}
+		inputFile.close();
+
+		// Should be able to run algorithms on A[i][] and arraySize[i] here.
+
+		results resOut;
+		for (int k = 0; k < lineCount; k++)
+		{
+			resOut = mssAlgorithm1(A[k], arraySize[k]);
+			output(A[k], arraySize[k], resOut.sum, resOut.startIdx, resOut.endIdx, 1);
+
+			resOut = mssAlgorithm2(A[k], arraySize[k]);
+			output(A[k], arraySize[k], resOut.sum, resOut.startIdx, resOut.endIdx, 2);
+
+			// Alg 3 should always start at index 0, right?
+			resOut = mssAlgorithm3(A[k], 0, arraySize[k]);		
+			output(A[k], arraySize[k], resOut.sum, resOut.startIdx, resOut.endIdx, 3);
+
+			resOut = mssAlgorithm4(A[k], arraySize[k]);
+			output(A[k], arraySize[k], resOut.sum, resOut.startIdx, resOut.endIdx, 4);
 		}
 	}
-	inputFile.close();
-	//outputFile.close();
+
+	else
+		cout << "\nUnable to open \"MSS_Problems.txt\"." << endl;
 	
-	// Should be able to run algorithms on A[i][] and arraySize[i] here.
-
-	results resOut;
-	for (int k = 0; k < lineCount; k++)
-	{
-		resOut = mssAlgorithm1(A[k], arraySize[k]);
-		output(A[k], arraySize[k], resOut.sum, resOut.startIdx, resOut.endIdx, 1);
-
-		resOut = mssAlgorithm2(A[k], arraySize[k]);
-		output(A[k], arraySize[k], resOut.sum, resOut.startIdx, resOut.endIdx, 2);
-
-		// Alg 3 should always start at index 0, right?
-		resOut = mssAlgorithm3(A[k], 0, arraySize[k]);		
-		output(A[k], arraySize[k], resOut.sum, resOut.startIdx, resOut.endIdx, 3);
-
-		resOut = mssAlgorithm4(A[k], arraySize[k]);
-		output(A[k], arraySize[k], resOut.sum, resOut.startIdx, resOut.endIdx, 4);
-	}
-	//cout << "Now calculating line # " << lineCount + 1 << endl;	
 }
 ////////////////////////////////////////////
 //	testCorrectness
