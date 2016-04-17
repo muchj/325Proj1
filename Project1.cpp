@@ -57,15 +57,10 @@ int main(int argc, char *argv[]){
 		{
 			testCorrectness();
 		}
-		else if(choice == "-e") //Testing Example
-		{
-			cout << "\nThis option hasn't been implemented yet.\n";
-			//testExample();
-		}
 		else
 		{
 			cout << "You did not enter correct arguments.\n" << endl;
-			cout << "Please add -r,-c, or -e as an argument." << endl;
+			cout << "Please add -r, or -c as an argument." << endl;
 		}
 	}
 
@@ -126,7 +121,7 @@ int inputFileLineCount()
 	while (inputFile.good())
 	{
 		getline(inputFile, line);
-		//cout << line << endl;
+	
 		if(line == "")
 		{
 			break;
