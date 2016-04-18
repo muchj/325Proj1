@@ -380,16 +380,14 @@ results mssAlgorithm3(int* array, int f, int l)
 		if(sum > maxLeft)
                 {
                     maxLeft = sum;
-                    startIdx = i;
-					
+                    startIdx = i;					
                 }
 	}
 	
-	if(sum < 0)
-	{
-		startIdx = (mid + 1);
-	}
-	
+	 if(maxLeft <= 0)
+     {
+        startIdx = mid + 1;
+     }
 	
 	sum = 0;
 	
@@ -398,10 +396,10 @@ results mssAlgorithm3(int* array, int f, int l)
 		sum += array[i];
 		if(sum > maxRight)
                 {
-                    maxRight = sum;
-                    endIdx = i;
-					
+					maxRight = sum;
+                    endIdx = i;					
                 }
+				
 	}
 		
 	maxCross = (maxLeft + maxRight);
