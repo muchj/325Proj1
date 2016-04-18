@@ -385,6 +385,12 @@ results mssAlgorithm3(int* array, int f, int l)
                 }
 	}
 	
+	if(sum < 0)
+	{
+		startIdx = (mid + 1);
+	}
+	
+	
 	sum = 0;
 	
 	for(int i = (mid + 1); i <= l; i++)
